@@ -203,7 +203,12 @@ int cmp(char *s1, char *s2)
 	#ifndef SANITIZE
 	return (ft_strcmp(s1, s2) == strcmp(s1, s2));
 	#else
-	return (!((ft_strcmp(s1, s2) ^ (strcmp(s1, s2))) >> (sizeof(int) * 8 - 1)));
+	int	ft;
+	int	lib;
+
+	ft = ft_strcmp(s1, s2);
+	lib = strcmp(s1, s2);
+	return (!((ft ^ lib) >> (sizeof(int) * CHAR_BIT - 1) || (--ft ^ --lib) >> (sizeof(int) * CHAR_BIT - 1)));
 	#endif
 }
 #endif
